@@ -3,9 +3,9 @@
 GREEN="\033[0;32m"
 RED="\033[0;31m"
 NOCOLOR="\033[0m"
-APPROVER_1_FULL_NAME="Seymur İsmayilov"
+APPROVER_1_FULL_NAME="Vüsal Kərimov"
 APPROVER_2_FULL_NAME="Emin Rəhmanov"
-APPROVER_1_DOMAIN_NAME="s.ismayilov"
+APPROVER_1_DOMAIN_NAME="v.karimov"
 APPROVER_2_DOMAIN_NAME="e.rahmanov"
 
 log_info() {

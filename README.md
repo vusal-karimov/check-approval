@@ -1,55 +1,23 @@
-**Merge Request Approval Script**
+**Merge Request Approver Verification Script**
 
 If you use GitLab Free, this script for you. 
 
 ![IMAGE_DESCRIPTION](./you.jpg)
 
-**Overview**
+Approvals in GitLab Free are optional, and don’t prevent a merge request from merging without approval. This script is designed to automate the verification process of merge request approvals in GitLab Free. It checks whether a merge request has been approved by one of the designated approvers. If neither of the required approvers has approved the request within a set timeframe, the script will fail the merge.
 
-Approvals in GitLab Free are optional, and don’t prevent a merge request from merging without approval. This script is designed to automate the verification process of merge request approvals in GitLab Free. It checks whether a merge request has been approved by one of the designated approvers. If the approval conditions are not met within a specified timeframe, the script will instruct the user to either close the merge request or update the assignees.
+**Key Features:**
 
-**Script Details**
+•	Approver Verification: Ensures that the approvers are either Vüsal Kərimov (v.karimov) or Emin Rəhmanov (e.rahmanov).
+•	Automated Retry Mechanism: Checks the approval status every 15 seconds, up to 8 times, before determining success or failure.
+•	Approval Status Output: Logs the approval status and approver details into approval.env for further processing.
+•	Customizable: Modify the approvers or adjust the retry logic as needed for your use case.
 
-**Approvers**
+**Requirements:**
 
-Approver 1: "Sander van Vugt"
-Approver 2: "Kohsuke Kawaguchi"
+•	GitLab Personal Access Token: You must supply a valid personal access token ($MERGE_APPROVE_TOKEN) with sufficient permissions to access the project's merge request approvals API.
+•	GitLab API URL and Merge Request Data: The script uses the $CI_API_V4_URL, $CI_PROJECT_ID, and $CI_MERGE_REQUEST_IID environment variables to interact with the GitLab API.
 
-**Functionality**
+**Usage:**
 
-The script performs the following tasks:
-
-Sets up color coding for log messages.
-Defines the approvers.
-Logs an initial message explaining the approval requirements.
-Checks the approval status of the merge request in a loop (up to 8 times, with a 15-second interval between checks).
-If the merge request is approved by one of the designated approvers, it logs a success message and saves the approval information.
-If the conditions are not met after 8 checks, it logs an error message and exits with a failure status.
-
-**Script Explanation**
-
-**Environment Variables**
-
-RED: ANSI escape code for red text.
-NOCOLOR: ANSI escape code to reset text color.
-APPROVER_1: The first designated approver.
-APPROVER_2: The second designated approver.
-
-**Log Function**
-
-A simple logging function to print messages in red color.
-
-**Approval Check Loop**
-
-The script uses a loop to check the approval status from the GitLab API. It sends a GET request to the GitLab API endpoint for merge request approvals, parses the JSON response, and checks if the merge request has been approved by either of the designated approvers.
-
-**Exit Conditions**
-
-Success: If the merge request is approved by one of the approvers, the script logs a success message, writes the approval information to "approval.env", and exits with a status of 0.
-Failure: If the merge request is not approved by the designated approvers after 8 checks, the script logs an error message, writes the failure information to "approval.env", and exits with a status of 1.
-
-**Important Notes**
-
-GitLab API Token: Ensure you replace "glpat-XXXXXXXXXXXXXXXXXX" with a valid GitLab private token.
-GitLab URL: Update "http://GitLab_URL" with the correct URL of your GitLab instance.
-Environment Variables: "CI_PROJECT_ID" and "CI_MERGE_REQUEST_IID" are GitLab's predefined CI/CD variables, and by combining these variables, you get the current project ID and project-level IID (internal ID) of the merge request for this project ID.
+Add the required approvers immediately after opening a merge request, and this script will verify the approval status. If the required approvers are not assigned or have not approved within the specified time, the merge request will be rejected.
