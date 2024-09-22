@@ -9,13 +9,17 @@ Approvals in GitLab Free are optional, and don’t prevent a merge request from 
 **Key Features:**
 
 •	Approver Verification: Ensures that the approvers are either Vüsal Kərimov (v.karimov) or Emin Rəhmanov (e.rahmanov).
+
 •	Automated Retry Mechanism: Checks the approval status every 15 seconds, up to 8 times, before determining success or failure.
+
 •	Approval Status Output: Logs the approval status and approver details into approval.env for further processing.
+
 •	Customizable: Modify the approvers or adjust the retry logic as needed for your use case.
 
 **Requirements:**
 
 •	GitLab Personal Access Token: You must supply a valid personal access token ($MERGE_APPROVE_TOKEN) with sufficient permissions to access the project's merge request approvals API.
+
 •	GitLab API URL and Merge Request Data: The script uses the $CI_API_V4_URL, $CI_PROJECT_ID, and $CI_MERGE_REQUEST_IID environment variables to interact with the GitLab API.
 
 **Usage:**
